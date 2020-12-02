@@ -437,7 +437,7 @@ class _HomePageState extends State<HomePage>{
       ),
     );
   }
-  //#love icon
+  //#love icon button
   Widget makeLove(){
     return Container(
       height:25,
