@@ -110,6 +110,7 @@ class _HomePageState extends State<HomePage>{
                             borderRadius:BorderRadius.circular(25),
                           ),
                           child:TextField(
+                            style:TextStyle(color:isWhite?Colors.grey[600]:Colors.grey[400]),
                             decoration:InputDecoration(
                               contentPadding:EdgeInsets.only(left:15),
                               hintText:'What\'s on your mind?',
