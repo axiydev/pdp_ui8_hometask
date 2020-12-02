@@ -5,50 +5,94 @@ class HomePage extends StatefulWidget{
   _HomePageState createState()=>_HomePageState();
 }
 class _HomePageState extends State<HomePage>{
+  bool isWhite=true;
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor:Colors.grey[300],
+      backgroundColor:isWhite?Colors.grey[300]:Colors.grey[600],
       appBar:AppBar(
-        //facebook
+        //#facebook
         title:Text('facebook',style:TextStyle(fontSize:28,color:Colors.blue,fontWeight:FontWeight.bold),),
         centerTitle:false,
-        backgroundColor:Colors.white,
+        backgroundColor:isWhite?Colors.white:Colors.black,
         elevation:0.0,
         bottomOpacity:0.0,
         actions:[
-          //searh button
+          //#animatedContainer button
+          Padding(
+            padding:EdgeInsets.symmetric(vertical:15),
+            child:GestureDetector(
+              child:Container(
+              padding:EdgeInsets.all(2),
+              height:10,
+              width:40,
+              decoration:BoxDecoration(
+                color:isWhite?Colors.white:Colors.black,
+                borderRadius:BorderRadius.circular(15),
+                border:Border.all(
+                  color:isWhite?Colors.black:Colors.white,
+                  width:2,
+                ),
+              ),
+              child:Align(
+                alignment:isWhite?Alignment.centerLeft:Alignment.centerRight,
+                  child:AnimatedContainer(
+                    duration:Duration(milliseconds:200),
+                    curve:Curves.easeIn,
+                    height:20,
+                    width:20,
+                    decoration:BoxDecoration(
+                      color:isWhite?Colors.black:Colors.white,
+                      shape:BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ),
+              onTap:(){
+                setState((){
+                  if(isWhite){
+                    isWhite=false;
+                  }
+                  else{
+                    isWhite=true;
+                  }
+                });
+              },
+            ),
+          ),
+          //#searh button
           IconButton(
             icon:Icon(Icons.search,size:28),
             onPressed:(){},
-            color:Colors.grey[700],
+            color:isWhite?Colors.grey[700]:Colors.grey[300],
           ),
-          //camera button
+          //#camera button
           IconButton(
             icon:Icon(Icons.camera_alt,size:28),
             onPressed:(){},
-            color:Colors.grey[700],
+            color:isWhite?Colors.grey[700]:Colors.grey[300],
           ),
         ],
       ),
       body:ListView(
         children:[
-          //header
+          //#header
           Container(
             padding:EdgeInsets.all(10),
             height:120,
-            color:Colors.white,
+            color:isWhite?Colors.white:Colors.black,
             child:Column(
               children:[
                 Expanded(
                   child:Row(
                     children:[
-                      //user img
+                      //#user img
                       Container(
                         height:45,
                         width:45,
                         decoration:BoxDecoration(
                           shape:BoxShape.circle,
+                          border:Border.all(width: 1,color:Colors.grey[800]),
                           image:DecorationImage(
                             image:AssetImage('assets/images/user_5.jpeg'),
                             fit:BoxFit.cover,
@@ -56,20 +100,20 @@ class _HomePageState extends State<HomePage>{
                         ),
                       ),
                       SizedBox(width:10),
-                      //textfield
+                      //#textfield
                       Expanded(
                         child:Container(
                           height:45,
                           decoration:BoxDecoration(
-                            color:Colors.white,
-                            border:Border.all(color:Colors.grey,width:1),
+                            color:isWhite?Colors.white:Colors.black,
+                            border:Border.all(color:isWhite?Colors.grey:Colors.grey[400],width:1),
                             borderRadius:BorderRadius.circular(25),
                           ),
                           child:TextField(
                             decoration:InputDecoration(
                               contentPadding:EdgeInsets.only(left:15),
                               hintText:'What\'s on your mind?',
-                              hintStyle:TextStyle(color:Colors.grey[600],fontSize:17),
+                              hintStyle:TextStyle(color:isWhite?Colors.grey[600]:Colors.grey[400],fontSize:17),
                               border:InputBorder.none,
                             ),
                           ),
@@ -79,12 +123,12 @@ class _HomePageState extends State<HomePage>{
                   ),
                 ),
                 SizedBox(height:10),
-                //sectors
+                //#sectors
                 Expanded(
                   child:Row(
                     mainAxisAlignment:MainAxisAlignment.center,
                     children:[
-                      //live
+                      //#live
                       Expanded(
                             child:Row(
                               mainAxisAlignment:MainAxisAlignment.center,
@@ -94,12 +138,12 @@ class _HomePageState extends State<HomePage>{
                                   color:Colors.red,
                                   onPressed:(){},
                                 ),
-                                Text('Live',style:TextStyle(color:Colors.grey[700],fontSize:16),),
+                                Text('Live',style:TextStyle(color:isWhite?Colors.grey[700]:Colors.grey[500],fontSize:16),),
                               ],
                           ),
                       ),
-                      Container(width:1,color:Colors.grey[400],margin:EdgeInsets.only(top:8,bottom:8)),
-                      //photo
+                      Container(width:1,color:isWhite?Colors.grey[400]:Colors.white,margin:EdgeInsets.only(top:8,bottom:8)),
+                      //#photo
                       Expanded(
                         child:Row(
                           mainAxisAlignment:MainAxisAlignment.center,
@@ -109,12 +153,12 @@ class _HomePageState extends State<HomePage>{
                               color:Colors.green,
                               onPressed:(){},
                             ),
-                            Text('Photo',style:TextStyle(color:Colors.grey[700],fontSize:16),),
+                            Text('Photo',style:TextStyle(color:isWhite?Colors.grey[700]:Colors.grey[500],fontSize:16),),
                           ],
                         ),
                       ),
-                      SizedBox(width:1,child:Container(margin:EdgeInsets.only(top:8,bottom:8),color:Colors.grey[400],)),
-                      //chech in
+                      SizedBox(width:1,child:Container(margin:EdgeInsets.only(top:8,bottom:8),color:isWhite?Colors.grey[400]:Colors.white,)),
+                      //#chech in
                       Expanded(
                         child:Row(
                           mainAxisAlignment:MainAxisAlignment.center,
@@ -124,10 +168,11 @@ class _HomePageState extends State<HomePage>{
                               color:Colors.red,
                               onPressed:(){},
                             ),
-                            Text('Check in',style:TextStyle(color:Colors.grey[700],fontSize:16),),
+                            Text('Check in',style:TextStyle(color:isWhite?Colors.grey[700]:Colors.grey[500],fontSize:16),),
                           ],
                         ),
                       ),
+                      SizedBox(width:10),
                     ],
                   ),
                 ),
@@ -139,10 +184,11 @@ class _HomePageState extends State<HomePage>{
             margin:EdgeInsets.only(top:10),
             padding:EdgeInsets.only(top:10,bottom:10,left:10),
             height:200,
-            color:Colors.white,
+            color:isWhite?Colors.white:Colors.black,
             child:ListView(
               scrollDirection:Axis.horizontal,
               children:[
+                //#user stories
                 _makeStory(
                   userImg:'assets/images/user_5.jpeg',
                   storyImg:'assets/images/story_5.jpeg',
@@ -171,34 +217,39 @@ class _HomePageState extends State<HomePage>{
               ],
             ),
           ),
-          //user posts
+          //#user posts
           _makePost(
             userImg:'assets/images/user_2.jpeg',
-            postImg:'assets/images/story_2.jpeg',
+            postImg1:'assets/images/story_2.jpeg',
+            postImg2:'assets/images/story_4.jpeg',
             userNme:'User Two',
             userTxt:'All the Lorem Ipsum generators on the Internet tend to repeat predefined',
           ),
           _makePost(
             userImg:'assets/images/user_1.jpeg',
-            postImg:'assets/images/feed_1.jpeg',
+            postImg1:'assets/images/feed_1.jpeg',
+            postImg2:'assets/images/story_1.jpeg',
             userNme:'User One',
             userTxt:'All the Lorem Ipsum generators on the Internet tend to repeat predefined',
           ),
           _makePost(
             userImg:'assets/images/user_3.jpeg',
-            postImg:'assets/images/feed_3.jpeg',
+            postImg1:'assets/images/feed_3.jpeg',
+            postImg2:'assets/images/story_3.jpeg',
             userNme:'User Three',
             userTxt:'All the Lorem Ipsum generators on the Internet tend to repeat predefined',
           ),
           _makePost(
             userImg:'assets/images/user_4.jpeg',
-            postImg:'assets/images/feed_4.jpeg',
+            postImg1:'assets/images/feed_4.jpeg',
+            postImg2:'assets/images/story_2.jpeg',
             userNme:'User Four',
             userTxt:'All the Lorem Ipsum generators on the Internet tend to repeat predefined',
           ),
           _makePost(
             userImg:'assets/images/user_5.jpeg',
-            postImg:'assets/images/feed_5.jpeg',
+            postImg1:'assets/images/feed_5.jpeg',
+            postImg2:'assets/images/story_5.jpeg',
             userNme:'User Five',
             userTxt:'All the Lorem Ipsum generators on the Internet tend to repeat predefined',
           ),
@@ -206,13 +257,14 @@ class _HomePageState extends State<HomePage>{
       ),
     );
   }
+  //#story
   Widget _makeStory({String userImg,String storyImg,String storyText,}){
     return AspectRatio(
       aspectRatio:1.4/2,
       child:Container(
         margin:EdgeInsets.only(right:10),
         decoration:BoxDecoration(
-          borderRadius:BorderRadius.circular(17),
+          borderRadius:BorderRadius.circular(20),
           color:Colors.green,
           image:DecorationImage(
             image:AssetImage(storyImg),
@@ -222,12 +274,13 @@ class _HomePageState extends State<HomePage>{
         child:Container(
           padding:EdgeInsets.all(10),
           decoration:BoxDecoration(
-            borderRadius:BorderRadius.circular(17),
+            borderRadius:BorderRadius.circular(20),
             gradient:LinearGradient(
               begin:Alignment.bottomRight,
               colors:[
-                Colors.black.withOpacity(0.9),
-                Colors.black.withOpacity(0.1),
+                isWhite?Colors.black.withOpacity(0.9):Colors.white.withOpacity(0.03),
+                isWhite?Colors.black.withOpacity(0.2):Colors.white.withOpacity(0.04),
+                isWhite?Colors.black.withOpacity(0.13):Colors.white.withOpacity(0.001),
               ],
             ),
           ),
@@ -238,32 +291,27 @@ class _HomePageState extends State<HomePage>{
               Container(
                 height:40,
                 width:40,
-                padding:EdgeInsets.all(2),
-                decoration:BoxDecoration(
-                  shape:BoxShape.circle,
-                  color:Colors.blue,
-                ),
-                child:Container(
                   decoration:BoxDecoration(
                     shape:BoxShape.circle,
+                    border:Border.all(width: 2.2,color:Colors.blue,),
                     image:DecorationImage(
                       image:AssetImage(userImg),
                       fit:BoxFit.cover,
                     ),
                   ),
                 ),
-              ),
-              Text(storyText,style:TextStyle(color:Colors.white,fontSize:17),),
+              Text(storyText,style:TextStyle(color:Colors.white,fontWeight:FontWeight.w400,fontSize:17),),
             ],
           ),
         ),
       ),
     );
   }
-  Widget _makePost({userImg,postImg,userNme,userTxt}){
+  //#post
+  Widget _makePost({userImg,postImg1,postImg2,userNme,userTxt}){
     return Container(
       margin:EdgeInsets.only(top:10),
-      color:Colors.white,
+      color:isWhite?Colors.white:Colors.black,
       child:Column(
         children:[
           Container(
@@ -289,7 +337,7 @@ class _HomePageState extends State<HomePage>{
                       child:Column(
                         crossAxisAlignment:CrossAxisAlignment.start,
                         children:[
-                          Text(userNme,style:TextStyle(color:Colors.black,fontWeight:FontWeight.bold,fontSize:19,letterSpacing: 1),),
+                          Text(userNme,style:TextStyle(color:isWhite?Colors.black:Colors.grey[400],fontWeight:FontWeight.bold,fontSize:19,letterSpacing: 1),),
                           Text('1 hr ago',style:TextStyle(color:Colors.grey,fontSize:16),),
                         ],
                       ),
@@ -298,7 +346,7 @@ class _HomePageState extends State<HomePage>{
                 ),
                 IconButton(
                   icon:Icon(Icons.more_horiz,size:27),
-                  color:Colors.grey[700],
+                  color:isWhite?Colors.grey[700]:Colors.grey,
                   onPressed:(){},
 
                 ),
@@ -306,21 +354,42 @@ class _HomePageState extends State<HomePage>{
             ),
           ),
           SizedBox(height:20),
+          //#sentence
           Container(
             padding:EdgeInsets.symmetric(horizontal: 10),
-            child:Text(userTxt,style:TextStyle(color:Colors.grey[700],height:1.2,letterSpacing: 1,fontSize:15,)),
+            child:Text(userTxt,style:TextStyle(color:isWhite?Colors.grey[700]:Colors.grey,height:1.2,letterSpacing: 1,fontSize:15,)),
           ),
           SizedBox(height:20),
+          //#post img
           Container(
             height:240,
-            decoration:BoxDecoration(
-              image:DecorationImage(
-                image:AssetImage(postImg),
-                fit:BoxFit.cover,
-              ),
+            child:Row(
+              children:[
+                Expanded(
+                  child:Container(
+                    height: double.infinity,
+                    width:double.infinity,
+                    child:Image(
+                      image:AssetImage(postImg1),
+                      fit:BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child:Container(
+                    height: double.infinity,
+                    width:double.infinity,
+                    child:Image(
+                      image:AssetImage(postImg2),
+                      fit:BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(height:20),
+          //#like and favourite
           Container(
             padding:EdgeInsets.symmetric(horizontal: 10),
             child:Row(
@@ -353,12 +422,13 @@ class _HomePageState extends State<HomePage>{
       ),
     );
   }
-  //like icon
+  //#like icon
   Widget makeLike(){
     return Container(
       height:25,
       width:25,
       decoration:BoxDecoration(
+        border:Border.all(width:1,color:Colors.white),
         color:Colors.blue,
         shape:BoxShape.circle,
       ),
@@ -367,12 +437,13 @@ class _HomePageState extends State<HomePage>{
       ),
     );
   }
-  //love icon
+  //#love icon
   Widget makeLove(){
     return Container(
       height:25,
       width:25,
       decoration:BoxDecoration(
+        border:Border.all(width:1,color:Colors.white),
         color:Colors.red,
         shape:BoxShape.circle,
       ),
@@ -381,7 +452,7 @@ class _HomePageState extends State<HomePage>{
       ),
     );
   }
-  //likebutton
+  //#likebutton
   Widget _makeLikeButton({bool isActive}){
   return Container(
       margin:EdgeInsets.only(left: 10),
@@ -397,7 +468,7 @@ class _HomePageState extends State<HomePage>{
       ),
   );
  }
- //comment button
+ //#comment button
  Widget _makeCommentButton({bool isActive}){
     return Container(
         child:Row(
@@ -412,7 +483,7 @@ class _HomePageState extends State<HomePage>{
         ),
     );
  }
- //share button
+ //#share button
  Widget _makeShareButton({bool isActive}){
     return Container(
       margin:EdgeInsets.only(right:10),
